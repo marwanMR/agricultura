@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الأحياء الدقيقة - الفرقة التانية زراعة</title>
+  <link rel="icon" href="https://i.postimg.cc/k5TtVWJL/Picsart-26-05-24-01-26-07-243.png">
+  <style>
+    :root{
+      --green:#1f7a4c;--green-dark:#0f4d2a;--bg:#e8f5e9;--card:#fff;--text:#1f2937;--shadow:rgba(0,0,0,.1)
+    }
+    [data-theme="dark"]{
+      --green:#2ecc71;--green-dark:#1e8449;--bg:#121212;--card:#1e1e1e;--text:#e0e0e0;--shadow:rgba(0,0,0,.3)
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Cairo',sans-serif;background:var(--bg);background-image:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" opacity="0.04"><path fill="%231f7a4c" d="M20 20 Q40 5 60 20 T100 20 V100 H0 Z"/></svg>');background-size:100px 100px;color:var(--text);min-height:100vh;padding-bottom:90px;transition:.3s}
+
+  .cover-header{position:relative;width:100%;height:300px;background:#000}
+  .cover-header img{width:100%;height:100%;object-fit:cover; object-position: center 50%;}
+  .cover-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(180deg,rgba(0,0,0,.15),rgba(0,0,0,.55))}
+  .cover-content{position:absolute;bottom:20px;right:20px;left:20px;color:#fff;text-align:right}
+  .cover-content h1{font-size:1.9rem;text-shadow:0 2px 10px #000;margin-bottom:12px}
+  .back-btn{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.2);backdrop-filter:blur(5px);color:#fff;padding:8px 15px;border-radius:8px;text-decoration:none;font-weight:700;transition:.2s;border:1px solid rgba(255,255,255,.3)}
+  .back-btn:hover{background:rgba(255,255,255,.3)}
+
+  .top-bar{display:flex;justify-content:center;gap:15px;margin-top:20px;flex-wrap:wrap}
+  .btn{background:linear-gradient(180deg,var(--green),var(--green-dark));color:#fff;padding:12px 22px;border-radius:12px;text-decoration:none;font-size:.95rem;font-weight:700;display:inline-flex;flex-direction:column;align-items:center;gap:5px;box-shadow:0 4px 0 var(--green-dark);transition:.1s;border:none;cursor:pointer;min-width:150px}
+  .btn:active{transform:translateY(4px);box-shadow:0 0 0 var(--green-dark)}
+  .btn svg{width:22px;height:22px;fill:#fff}
+  .btn-whatsapp{background:linear-gradient(180deg,#25D366,#128C7E);box-shadow:0 4px 0 #128C7E}
+  .btn-theme{background:linear-gradient(180deg,var(--green),var(--green-dark));border:none;box-shadow:0 4px 0 var(--green-dark)}
+
+  .container{max-width:900px;margin:0 auto;padding:30px 20px}
+  .grid{display:grid;grid-template-columns:repeat(3, 1fr);gap:20px}
+    @media (max-width: 768px){.grid{grid-template-columns:repeat(2, 1fr)}}
+    @media (max-width: 480px){.grid{grid-template-columns:1fr}}
+
+    /* كارت الPDF الجديد */
+  .pdf-card{background:var(--card);border-radius:18px;padding:15px;text-align:center;box-shadow:0 8px 15px var(--shadow),inset 0 -3px 0 var(--green-dark);transition:.2s;border-top:4px solid var(--green);position:relative;display:flex;flex-direction:column;gap:12px}
+  .pdf-card:hover{transform:translateY(-6px)}
+  .pdf-cover{width:100%;height:180px;background:#ddd;border-radius:12px;object-fit:cover}
+  .pdf-name{color:var(--green-dark);font-size:1.1rem;font-weight:700}
+  .btn-main{background:linear-gradient(180deg,var(--green),var(--green-dark));color:#fff;padding:12px 20px;border-radius:10px;text-decoration:none;font-size:1rem;font-weight:700;box-shadow:0 3px 0 var(--green-dark);transition:.1s;margin-top:auto}
+  .btn-main:active{transform:translateY(3px);box-shadow:0 0 0 var(--green-dark)}
+
+    /* 3 نقط - بقت ظاهرة للكل */
+  .dots-btn{position:absolute;top:10px;left:10px;background:rgba(0,0,0,.4);color:#fff;border:none;width:35px;height:35px;border-radius:50%;font-size:1.5rem;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .dots-menu{display:none;position:absolute;top:50px;left:10px;background:var(--card);border-radius:10px;box-shadow:0 5px 15px var(--shadow);z-index:10;min-width:150px;overflow:hidden}
+  .dots-menu.active{display:block}
+  .dots-menu button{width:100%;padding:12px;border:none;background:none;text-align:right;font-family:'Cairo';font-size:.95rem;cursor:pointer;color:var(--text)}
+  .dots-menu button:hover{background:var(--bg)}
+  .dots-menu button.delete{color:#e74c3c}
+
+    /* زرار + */
+  .fab{position:fixed;bottom:25px;right:25px;width:60px;height:60px;background:linear-gradient(180deg,var(--green),var(--green-dark));color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2.5rem;border:none;box-shadow:0 6px 0 var(--green-dark), 0 10px 20px rgba(0,0,0,.2);cursor:pointer;z-index:999}
+
+  .popup-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;z-index:1000}
+  .popup-overlay.active{display:flex}
+  .popup-box{background:var(--card);padding:25px;border-radius:20px;width:90%;max-width:400px}
+  .popup-box h3{color:var(--green-dark);margin-bottom:15px;text-align:center}
+  .popup-box input{width:100%;padding:12px;border:2px solid var(--green);border-radius:10px;font-family:'Cairo';font-size:1rem;background:var(--bg);color:var(--text);margin-bottom:12px}
+  .popup-btns{display:flex;gap:10px}
+  .popup-btn{flex:1;padding:12px;border:none;border-radius:10px;font-family:'Cairo';font-weight:700;cursor:pointer;font-size:1rem}
+  .btn-confirm{background:var(--green);color:#fff}
+  .btn-cancel{background:#ccc;color:#333}
+
+    footer{text-align:center;padding:30px 20px;color:var(--green-dark);font-size:.9rem;font-weight:600}
+  </style>
+</head>
+<body>
+  <header class="cover-header">
+    <img src="https://i.postimg.cc/gJKJtT2n/What-are-bacteria-placeholder-1.jpg" alt="Cover">
+    <div class="cover-overlay"></div>
+    <div class="cover-content">
+      <h1>الأحياء الدقيقة 🦠</h1>
+      <a href="term1.html" class="back-btn">← رجوع للمواد</a>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="top-bar">
+      <button class="btn btn-theme" id="themeBtn">
+        <svg id="themeIcon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <span id="themeText">تفعيل الوضع الليلي</span>
+      </button>
+      <a href="https://wa.me/201229816812" target="_blank" class="btn btn-whatsapp">
+        <svg viewBox="0 0 24 24"><path d="M20.52 3.48A11.86 11.86 0 0 0 12 .25 11.75 11.75 0 0 0 .25 12a11.6 11.6 0 0 0 1.6 5.82L0 24l6.3-1.65A11.74 11.74 0 0 0 12 23.75 11.86 11.86 0 0 0 20.52 3.48m-8.52 18.3a9.72 9.72 0 0 1-4.95-1.35l-.35-.2-3.74.98.99-3.63-.23-.38a9.7 9.7 0 0 1-1.5-5.2 9.75 9.75 0 0 1 16.4-7.08 9.75 9.75 0 0 1-6.62 16.76m5.38-7.3c-.3-.15-1.76-.87-2.03-.97s-.47-.15-.67.15-.76.97-.94 1.17-.35.22-.64.07a7.88 7.88 0 0 1-3.5-3.08c-.26-.45.26-.42.74-1.39a.64.64 0 0 0 0-.6c-.07-.15-.67-1.62-.92-2.22s-.48-.5-.67-.5h-.57a1.1 1 0 0 0-.8.38 3.36 3.36 0 0 0-1.05 2.5 5.9 5.9 0 0 0 1.22 3.1c.15.25 2.1 3.2 5.1 4.5.7.3 1.25.48 1.68.62.7.22 1.34.19 1.85.12.56-.08 1.76-.72 2-1.42s.26-1.3.18-1.42-.3-.23-.6-.38"/></svg>
+        <span>التواصل مع الدعم</span>
+      </a>
+    </div>
+
+    <div class="grid" id="pdfGrid" style="margin-top:25px;">
+      <!-- الكروت هتتحط هنا بالجافا سكريبت -->
+    </div>
+  </div>
+
+  <button class="fab" id="fabBtn">+</button>
+
+  <!-- بوب اب الباسورد -->
+  <div class="popup-overlay" id="passPopup">
+    <div class="popup-box">
+      <h3 id="passTitle">🔒 دخول الادمن</h3>
+      <input type="password" id="passInput" placeholder="دخل الباسورد">
+      <div class="popup-btns">
+        <button class="popup-btn btn-confirm" id="confirmPass">تأكيد</button>
+        <button class="popup-btn btn-cancel" id="cancelPass">الغاء</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- بوب اب الاضافة -->
+  <div class="popup-overlay" id="addPopup">
+    <div class="popup-box">
+      <h3>➕ اضافة PDF جديد</h3>
+      <input type="text" id="pdfName" placeholder="اسم الملف: مثال محاضرة 1">
+      <input type="url" id="pdfLink" placeholder="حط لينك جوجل درايف هنا">
+      <input type="url" id="pdfCover" placeholder="لينك صورة الغلاف اختياري">
+      <div class="popup-btns">
+        <button class="popup-btn btn-confirm" id="savePdf">حفظ</button>
+        <button class="popup-btn btn-cancel" id="cancelAdd">الغاء</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>اتعمل بحب لطلبة زراعة 💚 <br>تصميم وبرمجة: مروان محمد © 2026</footer>
+
+  <script>
+    const ADMIN_PASSWORD = "marwan_1911";
+    const STORAGE_KEY = 'micro_pdfs_v2';
+    let pdfs = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+    let currentAction = null; // هنخزن هنا احنا عايزين نعمل ايه: حذف ولا تعديل
+    let currentIndex = null; // هنخزن رقم الملف
+
+    // الوضع الليلي
+    document.addEventListener('DOMContentLoaded', () => {
+      const btn = document.getElementById('themeBtn');
+      const icon = document.getElementById('themeIcon');
+      const text = document.getElementById('themeText');
+      const html = document.documentElement;
+
+      function setTheme(theme) {
+        html.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+        if (theme === 'dark') {
+          icon.innerHTML = '<path d="M12 3a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0V4a1 1 0 0 1 1-1m0 14a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1M4.22 5.64a1 1 0 0 1 1.42 0l1.42 1.42a1 1 0 0 1-1.42 1.42L4.22 7.06a1 1 0 0 1 0-1.42m12.02 12.02a1 1 0 0 1 1.42 0l1.42 1.42a1 1 0 0 1-1.42 1.42l-1.42-1.42a1 1 0 0 1 0-1.42M3 12a1 1 0 0 1 1-1h2a1 1 0 1 1 0 2H4a1 1 0 0 1-1-1m16 0a1 1 0 0 1 1-1h2a1 1 0 1 1 0 2h-2a1 1 0 0 1-1-1M5.64 18.36a1 1 0 0 1 0-1.42l1.42-1.42a1 1 0 1 1 1.42 1.42l-1.42 1.42a1 1 0 0 1-1.42 0m12.02-12.02a1 1 0 0 1 0-1.42l1.42-1.42a1 1 0 1 1 1.42 1.42l-1.42 1.42a1 1 0 0 1-1.42 0M12 8a4 4 0 1 1 0 8 4 4 0 0 1 0-8z"/>';
+          text.textContent = 'إلغاء تفعيل الوضع الليلي';
+        } else {
+          icon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+          text.textContent = 'تفعيل الوضع الليلي';
+        }
+      }
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      setTheme(savedTheme);
+      btn.onclick = () => setTheme(html.getAttribute('data-theme') === 'dark'? 'light' : 'dark');
+      renderPDFs();
+    });
+
+    // عرض الكروت
+    function renderPDFs(){
+      const grid = document.getElementById('pdfGrid');
+      if(pdfs.length === 0){
+        grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;opacity:.6;margin-top:40px;">مفيش ملفات PDF لسه. دوس + عشان تضيف</p>';
+        return;
+      }
+      grid.innerHTML = pdfs.map((pdf, i) => `
+        <div class="pdf-card">
+          <button class="dots-btn" onclick="toggleMenu(${i})">⋮</button>
+          <div class="dots-menu" id="menu-${i}">
+            <button onclick="sharePdf('${pdf.link}','${pdf.name}')">📤 مشاركة</button>
+            <button onclick="downloadPdf('${pdf.link}','${pdf.name}')">⬇️ تنزيل</button>
+            <button onclick="requestAuth(${i}, 'rename')">✏️ تغيير الاسم</button>
+            <button class="delete" onclick="requestAuth(${i}, 'delete')">🗑️ حذف</button>
+          </div>
+          <img src="${pdf.cover || 'https://i.postimg.cc/gJKJtT2n/What-are-bacteria-placeholder-1.jpg'}" class="pdf-cover">
+          <div class="pdf-name">${pdf.name}</div>
+          <button class="btn-main" onclick="openPdfViewer('${pdf.link}','${pdf.name}')">فتح PDF</button>
+        </div>
+      `).join('');
+    }
+
+    // قايمة 3 نقط
+    function toggleMenu(i){
+      document.querySelectorAll('.dots-menu').forEach(m => m.classList.remove('active'));
+      document.getElementById(`menu-${i}`).classList.toggle('active');
+    }
+    document.body.onclick = (e) => {
+      if(!e.target.closest('.dots-btn') &&!e.target.closest('.dots-menu')) document.querySelectorAll('.dots-menu').forEach(m => m.classList.remove('active'));
+    }
+
+    // نظام الباسورد الجديد
+    function requestAuth(i, action){
+      currentIndex = i;
+      currentAction = action;
+      document.getElementById('passTitle').textContent = action === 'delete'? '🔒 تأكيد الحذف' : '🔒 تأكيد التعديل';
+      document.getElementById('passPopup').classList.add('active');
+      document.getElementById('passInput').focus();
+    }
+
+    document.getElementById('confirmPass').onclick = () => {
+      const pass = document.getElementById('passInput').value;
+      if(pass === ADMIN_PASSWORD){
+        document.getElementById('passPopup').classList.remove('active');
+        document.getElementById('passInput').value = '';
+if(currentAction === 'delete') deletePdf(currentIndex);
+        if(currentAction === 'rename') renamePdf(currentIndex);
+        if(currentAction === 'add') document.getElementById('addPopup').classList.add('active'); // <<<<< ده الجديد
+        currentAction = null; currentIndex = null;
+      } else {alert('الباسورد غلط ❌');}
+    }
+    document.getElementById('cancelPass').onclick = () => {
+      document.getElementById('passPopup').classList.remove('active');
+      document.getElementById('passInput').value = '';
+      currentAction = null; currentIndex = null;
+    }
+
+// اضافة - بقت بباسورد
+    document.getElementById('fabBtn').onclick = () => {
+      requestAuth(null, 'add');
+          }
+    document.getElementById('cancelAdd').onclick = () => document.getElementById('addPopup').classList.remove('active');
+
+    document.getElementById('savePdf').onclick = () => {
+      const name = document.getElementById('pdfName').value.trim();
+      let link = document.getElementById('pdfLink').value.trim();
+      const cover = document.getElementById('pdfCover').value.trim();
+      if(!name ||!link) return alert('لازم اسم ولينك');
+
+      if(link.includes('drive.google.com/file/d/')){
+        const fileId = link.split('/d/')[1].split('/')[0];
+link = `https://drive.google.com/file/d/${fileId}/preview`;
+      }
+      pdfs.unshift({name, link, cover});
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(pdfs));
+      renderPDFs();
+      document.getElementById('addPopup').classList.remove('active');
+      document.getElementById('pdfName').value = '';document.getElementById('pdfLink').value = '';document.getElementById('pdfCover').value = '';
+    }
+
+    // وظايف 3 نقط
+    function renamePdf(i){
+      const newName = prompt('الاسم الجديد:', pdfs[i].name);
+      if(newName){pdfs[i].name = newName; localStorage.setItem(STORAGE_KEY, JSON.stringify(pdfs)); renderPDFs();}
+    }
+    function deletePdf(i){
+      if(confirm('متأكد عايز تمسح؟')){pdfs.splice(i,1); localStorage.setItem(STORAGE_KEY, JSON.stringify(pdfs)); renderPDFs();}
+    }
+    function downloadPdf(url, name){
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = name + '.pdf';
+      a.target = '_blank';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+    function sharePdf(url, name){
+      const shareText = `ملف: ${name}\n${url}`;
+function openPdfViewer(url, name){
+      // هنفتحها في تاب جديد باستخدام عارض جوجل
+      const viewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(url)}&embedded=true`;
+      window.open(viewerUrl, '_blank');
+        }
+      
+      // 1. لو الموبايل بيدعم المشاركة الاصلية - اندرويد/ايفون
+      if(navigator.share){
+        navigator.share({title: name, text: shareText, url: url})
+          .catch(err => console.log('تم الغاء المشاركة'));
+        return;
+      }
+
+      // 2. لو مش بيدعم، افتحله اختيارات واتساب وتليجرام وفيسبوك
+      const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
+      const telegramUrl = `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(name)}`;
+      const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+
+      // هنعمل بوب اب صغير فيه الاختيارات
+      const choice = confirm(`المتصفح مش بيدعم المشاركة المباشرة\nموافق = واتساب\nالغاء = اختيارات تانية`);
+      
+      if(choice){
+        window.open(whatsappUrl, '_blank'); // هيفتح واتساب
+      } else {
+        // لو دوست الغاء هيفتحلك تختار تليجرام ولا فيسبوك
+        const app = prompt('اكتب: 1 ل تليجرام\nاكتب: 2 ل فيسبوك');
+        if(app === '1') window.open(telegramUrl, '_blank');
+        if(app === '2') window.open(facebookUrl, '_blank');
+      }
+    }
+  </script>
+</body>
+</html>
